@@ -1,9 +1,7 @@
 name: Docker Image Export
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
   export-image:
@@ -12,6 +10,8 @@ jobs:
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v3
+      with:
+        fetch-depth: 0  # 确保你可以访问整个 Git 历史记录以进行提交
 
     - name: Pull Docker Image
       run: docker pull ubuntu:20.04
@@ -19,8 +19,14 @@ jobs:
     - name: Save Docker Image
       run: docker save -o ubuntu.tar ubuntu:20.04
 
-    - name: Upload Docker Image Artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: ubuntu-tar
-        path: ubuntu.tar
+    - name: Add and Commit ubuntu.tar
+      run: |
+        git config user.name "github-actions"
+        git config user.email "github-actions@github.com"
+        git add ubuntu.tar
+        git commit -m "Add a tar file"
+        
+    - name: Push Changes
+      run: git push origin main
+      env:
+        GITHUB_TOKEN: ${{ secrets.TOKEN }}
