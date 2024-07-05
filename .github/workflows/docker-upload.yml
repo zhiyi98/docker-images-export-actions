@@ -18,9 +18,9 @@ jobs:
       run: docker pull ubuntu:20.04
 
     - name: Save Docker Image
-      run: docker save -o oracle-xe-11g.tar oracle-xe-11g:latest
+      run: docker save -o oracle-xe-11g.tar christophesurmont/oracle-xe-11g:latest
 
-    - name: Add and Commit oracle-xe-11g.tar
+    - name: Add and Commit Docker Image
       run: |
         git config --local user.email "yuanzhiyi98@gmail.com"
         git config --local user.name "zhiyi98"
