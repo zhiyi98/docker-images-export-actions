@@ -21,12 +21,13 @@ jobs:
 
     - name: Add and Commit ubuntu.tar
       run: |
-        git config user.name "github-actions"
-        git config user.email "github-actions@github.com"
+        git config --local user.email "yuanzhiyi98@gmail.com"
+        git config --local user.name "zhiyi98"
         git add ubuntu.tar
         git commit -m "Add a tar file"
         
     - name: Push Changes
-      run: git push origin main
-      env:
-        GITHUB_TOKEN: ${{ secrets.TOKEN }}
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.TOKEN }}
+        branch: main
