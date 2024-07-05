@@ -18,14 +18,14 @@ jobs:
       run: docker pull ubuntu:20.04
 
     - name: Save Docker Image
-      run: docker save -o ubuntu.tar ubuntu:20.04
+      run: docker save -o oracle-xe-11g.tar oracle-xe-11g:latest
 
-    - name: Add and Commit ubuntu.tar
+    - name: Add and Commit oracle-xe-11g.tar
       run: |
         git config --local user.email "yuanzhiyi98@gmail.com"
         git config --local user.name "zhiyi98"
-        git add ubuntu.tar
-        git commit -m "Add a tar file"
+        git add oracle-xe-11g.tar
+        git commit -m "Actions add a new tar file"
         
     - name: Push Changes
       uses: ad-m/github-push-action@master
