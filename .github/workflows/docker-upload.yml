@@ -15,7 +15,7 @@ jobs:
         fetch-depth: 0  # 确保你可以访问整个 Git 历史记录以进行提交
 
     - name: Pull Docker Image
-      run: docker pull ubuntu:20.04
+      run: docker pull christophesurmont/oracle-xe-11g:latest
 
     - name: Save Docker Image
       run: docker save -o oracle-xe-11g.tar christophesurmont/oracle-xe-11g:latest
