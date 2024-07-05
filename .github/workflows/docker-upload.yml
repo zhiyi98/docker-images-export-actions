@@ -1,0 +1,26 @@
+name: Docker Image Export
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  export-image:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Pull Docker Image
+      run: docker pull ubuntu:20.04
+
+    - name: Save Docker Image
+      run: docker save -o ubuntu.tar ubuntu:20.04
+
+    - name: Upload Docker Image Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: ubuntu-tar
+        path: ubuntu.tar
