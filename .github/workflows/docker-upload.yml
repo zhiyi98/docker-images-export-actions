@@ -15,16 +15,16 @@ jobs:
         fetch-depth: 0  # 确保你可以访问整个 Git 历史记录以进行提交
 
     - name: Pull Docker Image
-      run: docker pull christophesurmont/oracle-xe-11g:latest
+      run: docker pull centos:7.8.2003
 
     - name: Save Docker Image
-      run: docker save -o oracle-xe-11g.tar christophesurmont/oracle-xe-11g:latest
+      run: docker save -o centos.tar centos:7.8.2003
 
     - name: Add and Commit Docker Image
       run: |
         git config --local user.email "yuanzhiyi98@gmail.com"
         git config --local user.name "zhiyi98"
-        git add oracle-xe-11g.tar
+        git add centos.tar
         git commit -m "Actions add a new tar file"
         
     - name: Push Changes
